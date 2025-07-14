@@ -74,7 +74,7 @@ export default function InvitationPage() {
                                     alt={`Invitation part ${index + 1}`}
                                     width={isMobile ? 350 : 400}
                                     height={isMobile ? 500 : 1050}
-                                    className="w-full h-auto rounded-lg shadow-lg"
+                                    className="w-full h-auto rounded-lg shadow-[0_8px_24px_-8px_rgba(0,0,0,0.3)]"
                                     quality={95}
                                 />
                                 </div>
