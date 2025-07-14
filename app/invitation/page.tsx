@@ -7,20 +7,13 @@ export default function InvitationPage() {
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [isEN, setIsEN] = useState(true);
-    const [images, setImages] = useState([]);
-
+    
     useEffect(() => {
         const checkMobile = () => {
         setIsMobile(window.innerWidth < 768);
         };
         checkMobile();
     }, []);
-
-    const handleClick = () => {
-        setIsTransitioning(true);
-        setIsEN(!isEN);
-        setImages(isEN ? invitationIT : invitationEN);
-    };
 
     const invitationEN = [
         "/s_EN.jpg",
@@ -31,6 +24,14 @@ export default function InvitationPage() {
         "/s_IT.jpg",
         "/info_IT.jpg",
     ];
+
+    const [images, setImages] = useState(invitationEN);
+
+    const handleClick = () => {
+        setIsTransitioning(true);
+        setIsEN(!isEN);
+        setImages(isEN ? invitationIT : invitationEN);
+    };
 
     return (
         <div className="relative min-h-screen">
