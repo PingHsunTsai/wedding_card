@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [starPositions, setStarPositions] = useState([]);
+  const [starPositions, setStarPositions] = useState<Array<{
+    x: number;
+    y: number;
+    scale: number;
+  }>>([]);
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
@@ -20,13 +24,13 @@ export default function Home() {
     checkMobile();
     const areaWidth = isMobile ? 20 : 400;
     const areaHeight = isMobile ? 20 : 400;
-
-    const [starPositions, setStarPositions] = useState<Array<{
-      x: number;
-      y: number;
-      scale: number;
-    }>>([]);
     
+    const positions = [...Array(8)].map(() => ({
+      x: (Math.random() - 0.5) * areaWidth,
+      y: (Math.random() - 0.5) * areaHeight,
+      scale: 1 + Math.random() * 0.5,
+    }));
+
     setStarPositions(positions);
   }, []);
 
