@@ -49,7 +49,7 @@ export default function InvitationPage() {
             />
 
             {/* Scrollable Content Container */}
-            <div className="relative right-100 z-10 min-h-screen flex items-center justify-center p-4">
+            <div className={`relative ${isMobile ? '' : 'right-100'} z-10 min-h-screen flex items-center justify-center p-4`}>
                 {/* Card Container */}
                 <div className={`
                     bg-transparent
@@ -82,7 +82,7 @@ export default function InvitationPage() {
                 </div>
             </div>
 
-            <div className={`absolute ${isMobile ? 'top-[10%] left-[90%]' : 'top-[57%] left-[76%]'} -translate-x-1/2 -translate-y-1/2 z-20`}>
+            <div className={`absolute ${isMobile ? 'top-[10%] left-[88%]' : 'top-[57%] left-[76%]'} -translate-x-1/2 -translate-y-1/2 z-20`}>
                 <button
                 onClick={handleClick}
                 className="text-sm px-6 py-3 bg-transparent text-black rounded-full shadow-lg hover:bg-gray-200 transition-colors"
