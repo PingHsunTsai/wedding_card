@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PingHsun & Luca Wedding Invitation",
+  title: "PingHsun & Lucia Wedding Invitation",
   description: "Vicenzas, Italy",
 };
 
