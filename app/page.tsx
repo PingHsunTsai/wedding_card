@@ -21,11 +21,11 @@ export default function Home() {
     const areaWidth = isMobile ? 20 : 400;
     const areaHeight = isMobile ? 20 : 400;
 
-    const positions = [...Array(isMobile ? 8 : 12)].map(() => ({
-      x: (Math.random() - 0.5) * areaWidth,
-      y: (Math.random() - 0.5) * areaHeight,
-      scale: 1 + Math.random() * 0.5,
-    }));
+    const [starPositions, setStarPositions] = useState<Array<{
+      x: number;
+      y: number;
+      scale: number;
+    }>>([]);
     
     setStarPositions(positions);
   }, []);
