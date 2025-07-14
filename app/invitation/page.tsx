@@ -51,11 +51,11 @@ export default function InvitationPage() {
             />
 
             {/* Scrollable Content Container */}
-            <div className={`relative ${isMobile ? '' : 'right-100'} z-10 min-h-screen flex items-center justify-center p-4`}>
+            <div className={`relative ${isMobile ? '' : 'right-9'} z-10 min-h-screen flex items-center justify-center p-4`}>
                 {/* Card Container */}
                 <div className={`
                     bg-transparent
-                    ${isMobile ? 'w-full max-w-sm h-[80vh]' : 'w-full max-w-2xl h-[85vh]'}
+                    ${isMobile ? 'w-full max-w-sm h-[80vh]' : 'w-full max-w-[525px] h-[85vh]'}
                     flex flex-col
                     overflow-hidden
                 `}>
@@ -72,8 +72,8 @@ export default function InvitationPage() {
                                 <Image
                                     src={imagePath}
                                     alt={`Invitation part ${index + 1}`}
-                                    width={isMobile ? 350 : 600}
-                                    height={isMobile ? 500 : 850}
+                                    width={isMobile ? 350 : 400}
+                                    height={isMobile ? 500 : 1050}
                                     className="w-full h-auto rounded-lg shadow-lg"
                                     quality={95}
                                 />
