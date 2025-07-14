@@ -8,17 +8,23 @@ export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [starPositions, setStarPositions] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
   // Generate star positions only on client side
   useEffect(() => {
-    const areaWidth = 100;
-    const areaHeight = 100;
-    
-    const positions = [...Array(5)].map(() => ({
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    // Adjust area based on screen size
+    checkMobile();
+    const areaWidth = isMobile ? 20 : 400;
+    const areaHeight = isMobile ? 20 : 400;
+
+    const positions = [...Array(isMobile ? 8 : 12)].map(() => ({
       x: (Math.random() - 0.5) * areaWidth,
       y: (Math.random() - 0.5) * areaHeight,
-      scale: 1 + Math.random(),
+      scale: 1 + Math.random() * 0.5,
     }));
     
     setStarPositions(positions);
@@ -33,30 +39,45 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen">
-      {/* Background Image */}
-      <Image
-        src="/envelope.png"
-        alt="Background"
-        fill
-        priority
+    <div className="relative min-h-screen min-h-[100dvh] overflow-hidden">
+      {/* Animated Background Image */}
+      <div
         className={`
-          object-cover object-center
-          transition-transform duration-1000 ease-in-out
-          ${isTransitioning ? 'scale-150' : 'scale-100'}
+          absolute inset-0
+          transition-all duration-1000 ease-in-out
+          ${isTransitioning 
+            ? 'scale-125' 
+            : 'scale-100'
+          }
         `}
-        quality={100}
-      />
+      >
+        <Image
+          src={isMobile ? "/envelope_mobile.png" : "/envelope.png"}
+          alt="Background"
+          fill
+          priority
+          className="object-cover object-center"
+          quality={100}
+        />
+      </div>
       
-      <div className="absolute inset-0 bg-black/20" />
+      <div className={`
+        absolute inset-0 bg-black
+        transition-opacity duration-1000 ease-in-out
+        ${isTransitioning ? 'opacity-40' : 'opacity-20'}
+      `} />
 
-      <div className="absolute top-[45%] left-[55%] -translate-x-1/2 -translate-y-1/2 z-20">
-        {/* Animated Stars - only render after positions are generated */}
+      {/* Stars Container - Responsive positioning */}
+      <div className="absolute 
+                      top-1/2 left-1/2 
+                      -translate-x-1/2 -translate-y-1/2 z-20">
+        {/* Animated Stars */}
         {starPositions.map((position, i) => {
           const viewBoxX = 40;
           const viewBoxY = 40;
           const offsetX = 5 * position.scale;
           const offsetY = 2;
+          const starSize = isMobile ? 8 : 20;
 
           return (
             <div
@@ -70,41 +91,77 @@ export default function Home() {
                 animationDuration: `${2 + i * 0.3}s`
               }}
             >
-              <svg width="25" height="25" viewBox={`0 0 ${viewBoxX} ${viewBoxY}`}>
+              <svg 
+                width={starSize * position.scale} 
+                height={starSize * position.scale} 
+                viewBox={`0 0 ${viewBoxX} ${viewBoxY}`}
+                className="text-white/60"
+              >
                 <path 
                   d={`M${viewBoxX / 2} ${offsetY}V${viewBoxY - offsetY}M${offsetX} ${viewBoxY / 2}H${viewBoxX - offsetX}`}
                   stroke="currentColor" 
                   strokeWidth="2" 
                   fill="none"
                 />
-                <circle cx={`${viewBoxX / 2}`} cy={`${viewBoxY / 2}`} r="4" fill="currentColor" />
+                <circle 
+                  cx={viewBoxX / 2} 
+                  cy={viewBoxY / 2} 
+                  r="3" 
+                  fill="currentColor" 
+                  opacity="0.8"
+                />
               </svg>
             </div>
           );
         })}
       </div>
 
-      <div className="absolute top-[57%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-20">
-        {/* Button */}
-        <button
-          onClick={handleClick}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className="relative w-40 h-40 rounded-full cursor-pointer
+      {/* Button Container */}
+      <div className={`absolute 
+                      ${isMobile ? 'top-[50%]' : 'top-[57%]'} left-1/2 
+                      -translate-x-1/2 -translate-y-1/2 z-20`}>
+        {/* Mobile Layout */}
+        {isMobile ? (
+          <div className="flex items-center gap-4">
+            <span className="absolute right-0 top-[100%] text-white/80 text-sm font-medium animate-pulse">
+               ↑ Click
+            </span>
+            <button
+              onClick={handleClick}
+              className="relative 
+                       w-20 h-20 
+                       rounded-full cursor-pointer
+                       transition-all duration-300 ease-in-out
+                       active:bg-white/20
+                       tap-highlight-transparent"
+              aria-label="Open invitation"
+            />
+          </div>
+        ) : (
+          /* Desktop Layout */
+          <button
+            onClick={handleClick}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="relative 
+                     w-40 h-40 
+                     rounded-full cursor-pointer
                      transition-all duration-300 ease-in-out
-                     hover:bg-white/10 hover:backdrop-blur-sm"
-          aria-label="Open invitation"
-        >
-          <span 
-            className={`
-              text-white font-medium text-lg
-              transition-all duration-300 ease-in-out
-              ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
-            `}
+                     hover:bg-white/10
+                     hover:backdrop-blur-sm"
+            aria-label="Open invitation"
           >
-            Click Here
-          </span>
-        </button>
+            <span 
+              className={`
+                text-white font-medium text-lg
+                transition-all duration-300 ease-in-out
+                ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
+              `}
+            >
+              Click Here
+            </span>
+          </button>
+        )}
       </div>
 
       {/* Transition Overlay */}
