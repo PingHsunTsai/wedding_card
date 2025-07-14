@@ -132,7 +132,7 @@ export default function Home() {
         {/* Mobile Layout */}
         {isMobile ? (
           <div className="flex items-center gap-4">
-            <span className="absolute right-0 top-[100%] text-white/80 text-sm font-medium animate-pulse">
+            <span className="absolute right-0 top-[100%] text-black/80 text-sm font-medium animate-pulse">
                ↑ Click
             </span>
             <button
