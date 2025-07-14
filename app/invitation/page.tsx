@@ -16,11 +16,13 @@ export default function InvitationPage() {
     }, []);
 
     const invitationEN = [
+        "/cover.jpg",
         "/s_EN.jpg",
         "/info_EN.jpg",
     ];
 
     const invitationIT = [
+        "/cover.jpg",
         "/s_IT.jpg",
         "/info_IT.jpg",
     ];

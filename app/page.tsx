@@ -95,11 +95,17 @@ export default function Home() {
                 width={starSize * position.scale} 
                 height={starSize * position.scale} 
                 viewBox={`0 0 ${viewBoxX} ${viewBoxY}`}
-                className="text-white/60"
+                className="drop-shadow-md"
               >
+                <defs>
+                  <linearGradient id={`gold-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#D4AF37" />
+                    <stop offset="100%" stopColor="#8B6914" />
+                  </linearGradient>
+                </defs>
                 <path 
                   d={`M${viewBoxX / 2} ${offsetY}V${viewBoxY - offsetY}M${offsetX} ${viewBoxY / 2}H${viewBoxX - offsetX}`}
-                  stroke="currentColor" 
+                  stroke={`url(#gold-${i})`}
                   strokeWidth="2" 
                   fill="none"
                 />
@@ -107,8 +113,7 @@ export default function Home() {
                   cx={viewBoxX / 2} 
                   cy={viewBoxY / 2} 
                   r="3" 
-                  fill="currentColor" 
-                  opacity="0.8"
+                  fill={`url(#gold-${i})`}
                 />
               </svg>
             </div>
