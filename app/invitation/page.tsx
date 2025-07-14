@@ -47,8 +47,6 @@ export default function InvitationPage() {
                 `}
                 quality={100}
             />
-            
-            <div className="absolute inset-0 bg-black/5" />
 
             {/* Scrollable Content Container */}
             <div className="relative right-100 z-10 min-h-screen flex items-center justify-center p-4">

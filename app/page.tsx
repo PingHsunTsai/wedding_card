@@ -62,7 +62,7 @@ export default function Home() {
       </div>
       
       <div className={`
-        absolute inset-0 bg-black
+        absolute inset-0 bg-black-5
         transition-opacity duration-1000 ease-in-out
         ${isTransitioning ? 'opacity-40' : 'opacity-20'}
       `} />
