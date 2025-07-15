@@ -19,12 +19,16 @@ export default function InvitationPage() {
         "/cover.jpg",
         "/s_EN.jpg",
         "/info_EN.jpg",
+        "/hotel_EN.jpg",
+        "/food_EN.jpg",
     ];
 
     const invitationIT = [
         "/cover.jpg",
         "/s_IT.jpg",
         "/info_IT.jpg",
+        "/hotel_IT.jpg",
+        "/food_IT.jpg",
     ];
 
     const [images, setImages] = useState(invitationEN);
